@@ -1,0 +1,41 @@
+{
+	"version": "2.0.0",
+	"options": {
+		"cwd": "${workspaceFolder}/build" // 命令执行目录
+	},
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "CMake",
+			"command": "cmake",
+			"options":{
+				"cwd": "${workspaceFolder}/build"
+			},
+			"args": [
+				"-DCMAKE_BUILD_TYPE=Debug",
+				".."
+			],
+		},
+		{
+			"label": "Make",
+			"command": "make",
+			"options":{
+				"cwd": "${workspaceFolder}/build"
+			},
+			"args": [
+				"-j4"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+		},
+		{
+			"label": "Build",
+			"dependsOn": [
+				"CMake",
+				"Make"
+			]
+		}
+	]
+}
